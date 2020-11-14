@@ -1,5 +1,7 @@
 # smart-shopping
 
+![Sample](https://github.com/code-camp-1983/smart-shopping/blob/master/sample.png?raw=true)
+
 ## development
 
 ```bash
