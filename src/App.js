@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import axios from "axios";
 import sampleData from "./sample-data";
 
+import ResultBox from "./components/ResultBox";
+
 function App() {
   const config = {
     headers: {
@@ -70,40 +72,14 @@ function App() {
             <div className="column">
               <div className="columns">
                 <div className="column">
-                  <form className="form">
-                    <div className="field is-horizontal">
-                      <div className="field-label is-normal">
-                        <label className="label">File</label>
-                      </div>
-                      <div className="field-body">
-                        <div className="field">
-                          <div className="control">
-                            <input className="input" type="file" ref={el} onChange={handleChange} />{" "}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    {isSubmit && (
-                      <div className="field">
-                        <div className="control">
-                          <progress className="progress is-success" value={progress} max="100">
-                            {progress}%
-                          </progress>
-                        </div>
-                      </div>
-                    )}
-                    <div className="field">
-                      <div className="control has-text-centered">
-                        <button
-                          onClick={uploadFile}
-                          className={"button is-primary" + (isSubmit ? " is-loading" : "")}
-                          disabled={!file}
-                        >
-                          Upload
-                        </button>
-                      </div>
-                    </div>
-                  </form>
+                  <Upload
+                    el={el}
+                    file={file}
+                    isSubmit={isSubmit}
+                    handleChange={handleChange}
+                    progress={progress}
+                    uploadFile={uploadFile}
+                  />
                 </div>
               </div>
               {response && (
@@ -124,42 +100,42 @@ function App() {
   );
 }
 
-function ResultBox({ response, isSubmit }) {
+function Upload({ handleChange, isSubmit, progress, file, el, uploadFile }) {
   return (
-    <div
-      className="box"
-      style={{ minHeight: "500px", display: "flex", alignItems: "center", justifyContent: "center" }}
-    >
-      {!response && <div>Results here</div>}
-      {response && <Receipt data={response.data} />}
-    </div>
-  );
-}
-
-function Receipt({ data }) {
-  if (!data) {
-    return null;
-  }
-
-  return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.line_items.map((item) => {
-          return (
-            <tr>
-              <td>{item.description}</td>
-              <td className="has-text-centered">{item.quantity}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <form className="form">
+      <div className="field is-horizontal">
+        <div className="field-label is-normal">
+          <label className="label">File</label>
+        </div>
+        <div className="field-body">
+          <div className="field">
+            <div className="control">
+              <input className="input" type="file" ref={el} onChange={handleChange} />{" "}
+            </div>
+          </div>
+        </div>
+      </div>
+      {isSubmit && (
+        <div className="field">
+          <div className="control">
+            <progress className="progress is-success" value={progress} max="100">
+              {progress}%
+            </progress>
+          </div>
+        </div>
+      )}
+      <div className="field">
+        <div className="control has-text-centered">
+          <button
+            onClick={uploadFile}
+            className={"button is-primary" + (isSubmit ? " is-loading" : "")}
+            disabled={!file}
+          >
+            Upload
+          </button>
+        </div>
+      </div>
+    </form>
   );
 }
 
