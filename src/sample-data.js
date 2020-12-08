@@ -1,4 +1,4 @@
-const sampleData = {
+const sampleVeryfiResponse = {
   "abn_number": "",
   "account_number": "",
   "bill_to_address": "",
@@ -164,4 +164,4 @@ const sampleData = {
   "vendor_iban": ""
 };
 
-export default sampleData;
+export default sampleVeryfiResponse;

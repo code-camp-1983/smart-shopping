@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
-import sampleData from "./sample-data";
+import sampleVeryfiResponse from "./sample-data";
 
 import ResultBox from "./components/ResultBox";
 
@@ -57,7 +57,7 @@ function App() {
     setResponse(null);
 
     setTimeout(() => {
-      const newReponse = { data: sampleData };
+      const newReponse = { data: sampleVeryfiResponse };
       console.log(newReponse);
       setResponse(newReponse);
       setIsSubmit(false);
